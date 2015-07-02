@@ -24,4 +24,5 @@ urlpatterns = patterns('',
  
     url(r'^admin/', include(admin.site.urls)),
     url(r"^media/",'myWeather.views.register')
+    url(r"^my/",'myWeather.views.image')
 )

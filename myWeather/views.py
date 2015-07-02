@@ -3,6 +3,7 @@ from django.shortcuts import render,render_to_response,RequestContext
 from django import forms
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
+import json
 
 from myWeather.models import User
     
@@ -32,6 +33,20 @@ def register(request):
             return HttpResponse('upload ok!')
     else:
         uf = UserForm()
-    
-
         return render_to_response('register.html',{'uf':uf},context_instance=RequestContext(request))
+
+def image(request):
+
+    response_data = {}  
+    if request.method == "POST":
+        req = simplejson.loads(request.raw_post_data)
+        username = req['ds']
+        headImg = req['fStream']
+
+         #写入数据库
+        user = User()
+        user.username = username
+        user.headImg = headImg 
+        user.save()
+
+return HttpResponse('upload ok!')
