@@ -9,8 +9,12 @@ from myWeather.models import User
     
 
 
-#def index(request):
- #   return HttpResponse(u"hello!")
+def index(request):
+    if request.method == "POST":
+        return HttpResponse("name")
+    return HttpResponse(u"lqcshishagua")
+
+
 
 # Create your views here.
 class UserForm(forms.Form):
@@ -30,17 +34,17 @@ def register(request):
             user.username = username
             user.headImg = headImg
             user.save()
-            return HttpResponse('upload ok!')
+        return HttpResponse('upload ok!')
     else:
         uf = UserForm()
         return render_to_response('register.html',{'uf':uf},context_instance=RequestContext(request))
 
-def image(request):
+def test(request):
 
     response_data = {}  
     if request.method == "POST":
         req = simplejson.loads(request.raw_post_data)
-        username = req['ds']
+        username = req['name']
         headImg = req['fStream']
 
          #写入数据库
@@ -49,4 +53,19 @@ def image(request):
         user.headImg = headImg 
         user.save()
 
-return HttpResponse('upload ok!')
+    return HttpResponse('upload ok!')
+
+
+
+def image(request):
+    if request.method == "POST":
+        name = request.POST.get('name',1) 
+        print(name)
+        #写入数据库
+        user = User()
+        user.username = username
+        #user.headImg = headImg 
+        user.save()
+        return HttpResponse("tname")
+
+    return HttpResponse(u"lqcshishagua")

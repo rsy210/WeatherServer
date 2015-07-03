@@ -19,10 +19,11 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    #url(r'^$', 'myWeather.views.index', name='home'),# Notice this line
+    url(r'^$', 'myWeather.views.index', name='home'),# Notice this line
     # url(r'^blog/', include('blog.urls')),
  
     url(r'^admin/', include(admin.site.urls)),
-    url(r"^media/",'myWeather.views.register')
-    url(r"^my/",'myWeather.views.image')
+    url(r"^media/",'myWeather.views.register'),
+    url(r"^my/",'myWeather.views.test'),
+    url(r"^image/",'myWeather.views.image'),
 )
